@@ -1,0 +1,29 @@
+<#include "/_default.ftl">
+<@defaultLayout>
+<section id="primary" class="site-content">
+	<div id="content" role="main">
+		<header class="entry-header">
+		<h1 class="entry-title">${page.title}</span></h1>
+		</header><!-- .archive-header -->
+	
+		<#assign year = "0000">
+		<#list page.posts as post>
+		<#assign this_year = post.date?string("yyyy")>
+		<#if year != this_year>
+		<#assign year = this_year>
+			<header class="archive-header">
+			<h1 class="archive-title">年度：${ year }</span></h1>
+			</header><!-- .archive-header -->
+		</#if>
+
+		<#include "/post/archive_post.ftl">
+		</#list>
+	
+	
+	</div><!-- #content -->
+</section><!-- #primary -->
+
+<div id="secondary" class="widget-area" role="complementary">
+<#include "/asides/page_asides.ftl">
+</div><!-- #secondary -->
+</@defaultLayout>

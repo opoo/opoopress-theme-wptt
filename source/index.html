@@ -1,0 +1,50 @@
+---
+layout: default
+---
+
+<div id="primary" class="site-content">
+	<div id="content" role="main">
+
+<#assign index = true >
+<#list paginator.posts as post>
+	<#assign content = post.content>
+	<#assign postid = post.url?replace('/','')>
+
+	<article id="post-${postid}" class="post-${postid} post type-post status-publish format-standard hentry">
+		<header class="entry-header">
+			<h1 class="entry-title"><a href="${ root_url }${ post.url }" rel="bookmark">${titlecase(post.title)}</a></h1>
+
+			<#if site.disqus_short_name?? && (page.comments)!true == true && (post.comments)!true == true && (site.disqus_show_comment_count)!false == true>
+			<div class="comments-link"><a href="${root_url}${post.url}#disqus_thread" title="《${titlecase(post.title)}》上的评论"><span class="leave-reply"><@i18n.msg "Comments"/></span></a></div><!-- .comments-link -->
+			</#if>
+
+			<#if site.duoshuo_short_name?? && (page.comments)!true == true && (post.comments)!true == true && (site.duoshuo_show_comment_count)!false == true>
+			<div class="comments-link"><a href="${root_url}${post.url}#ds-thread"><span class="ds-thread-count" data-thread-key="${root_url}${post.url}"><@i18n.msg "Comments"/></span></a></div><!-- .comments-link -->
+			</#if>
+		</header><!-- .entry-header -->
+
+		<div class="entry-content">${post.excerpt}
+		<#if post.excerpted == true><p> <a href="${ root_url }${ post.url }" class="more-link">${site.excerpt_link} <span class="meta-nav">&rarr;</span></a></p></#if>
+		</div><!-- .entry-content -->
+		
+		<footer class="entry-meta">
+			发布于<#include "post/date.ftl"><#if was_updated??>${updated}<#else>${time}</#if>
+            <#include "post/categories.ftl">
+		</footer><!-- .entry-meta -->
+	</article><!-- #post -->
+</#list>
+
+
+	<nav id="nav-below" class="navigation" role="navigation">
+		<h3 class="assistive-text">文章导航</h3>
+		<div class="nav-previous"><#if (paginator.next)??><a href="${root_url}${paginator.next.url}"><span class="meta-nav">&larr;</span> 早期文章</a></#if></div>
+		<div class="nav-next"><#if (paginator.previous)??><a href="${root_url}${paginator.previous.url}">近期文章 <span class="meta-nav">&rarr;</span> </a></#if></div>
+	</nav><!-- #nav-below .navigation -->
+
+	</div><!-- #content -->
+</div><!-- #primary -->
+  
+
+<div id="secondary" class="widget-area" role="complementary">
+  <#include "asides/blog_index_asides.ftl">
+</div><!-- #secondary -->
