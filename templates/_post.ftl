@@ -22,7 +22,7 @@
             <div class="entry-content"><#nested></div><!-- .entry-content -->
             
             <footer class="entry-meta">
-                本条目发布于<#include "post/date.ftl"><#if was_updated??>${updated}<#else>${time}</#if>
+                发布于<#include "post/date.ftl"><#if was_updated??>${updated}<#else>${time}</#if>
                 <#include "post/categories.ftl">
             </footer><!-- .entry-meta -->
         </article><!-- #post -->
